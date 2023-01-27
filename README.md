@@ -1,10 +1,10 @@
-John A. Smith
+Victor Ramirez
 
 Data Science Portfolio
 
-john_smith@yahoo.com
+victor.ramirez@berkeley.edu
 
-Masters in Data Science (in progress - expected Summer 2021)
+Masters in Data Science (in progress - expected Spring 2023)
 
 Univeristy of California, Berkeley
 
