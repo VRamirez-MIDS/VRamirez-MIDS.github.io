@@ -1,0 +1,44 @@
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Node modules (if you add any build tools later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs (if you add any build process)
+dist/
+build/
+.cache/
+
+# Environment variables (if you add any)
+.env
+.env.local
+.env.production
+
+# Backup files
+*.bak
+*.backup
+
+# Comments: 
+# NOTE: .github/copilot-instructions.md should NOT be ignored
+# NOTE: This is a simple static site, so most entries are precautionary
