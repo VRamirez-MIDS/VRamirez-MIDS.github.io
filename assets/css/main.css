@@ -1,5 +1,24 @@
-    @import url(fontawesome-all.min.css);
-    @import url("https://fonts.googleapis.com/css?family=Merriweather:300,700,300italic,700italic|Source+Sans+Pro:900");
+@import url(fontawesome-all.min.css);
+@import url("https://fonts.googleapis.com/css?family=Merriweather:300,700,300italic,700italic|Source+Sans+Pro:900");
+/* Clearfix utility to fix float issues */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+/* Profile photo styling for professional, responsive display */
+.profile-photo {
+    display: block;
+    max-width: 240px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3/4;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    margin: 0 2rem 2rem 0;
+    object-fit: cover;
+    float: left;
+}
     /*
 	Massively by HTML5 UP
 	html5up.net | @ajlkn
