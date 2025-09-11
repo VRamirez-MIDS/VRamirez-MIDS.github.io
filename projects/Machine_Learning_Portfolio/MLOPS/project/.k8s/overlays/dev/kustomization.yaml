@@ -1,0 +1,8 @@
+---
+namespace: victorramirez
+bases:
+  - ../../bases
+patches:
+  - path: patch-deployment-project.yaml
+    target:
+      kind: Deployment

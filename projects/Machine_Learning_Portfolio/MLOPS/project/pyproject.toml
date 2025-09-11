@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "src"
+version = "0.1.0"
+description = ""
+authors = ["James Winegar <jameswine@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+transformers = "^4.23.1"
+torch = [
+  {url = "https://download.pytorch.org/whl/cpu/torch-1.12.1%2Bcpu-cp310-cp310-linux_x86_64.whl", "platform" = "linux"},
+  {url = "https://download.pytorch.org/whl/cpu/torch-1.12.1%2Bcpu-cp310-cp310-win_amd64.whl", "platform" = "win32"},
+  {url = "https://download.pytorch.org/whl/cpu/torch-1.12.1-cp310-none-macosx_10_9_x86_64.whl", "platform" = "darwin",  markers = "platform_machine == 'x86_64'" },
+  {url = "https://download.pytorch.org/whl/cpu/torch-1.12.1-cp310-none-macosx_11_0_arm64.whl", "platform" = "darwin",  markers = "platform_machine == 'arm64'" }
+]
+scipy = "^1.10"
+scikit-learn = "^1.2.2"
+datasets = "^2.10.1"
+requests = "^2.28"
+fastapi-cache2 = {extras = ["redis"], version = "^0.1.9"}
+fastapi = "^0.95"
+uvicorn = "^0.21"
+httpx = "^0.24.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7"
+isort = "^5"
+black = "^23"
+pre-commit = "^3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
