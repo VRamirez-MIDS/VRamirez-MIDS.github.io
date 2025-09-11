@@ -81,6 +81,10 @@ Flight Analysis/
 
 ---
 
+Main Project Repository: [datasciw261](https://github.com/vhr1975/datasciw261)
+
+---
+
 ## License
 
 This project is for educational purposes as part of the UC Berkeley MIDS program.
