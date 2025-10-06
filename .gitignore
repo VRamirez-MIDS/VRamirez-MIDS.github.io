@@ -1,0 +1,24 @@
+# macOS files
+.DS_Stre
+.DS_Store
+
+# Thumbs and desktop.ini
+Thumbs.db
+Desktop.ini
+
+# Node modules (if any node projects are added)
+node_modules/
+
+# Python virtualenvs
+venv/
+ENV/
+env/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Build / distribution
+dist/
+build/
+*.egg-info/
