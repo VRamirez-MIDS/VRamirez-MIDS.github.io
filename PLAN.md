@@ -11,18 +11,45 @@ on Cloudflare's free tier, including an AI-Vic chatbot grounded in Victor's resu
 ```
 GitHub (source) → Cloudflare Pages (Astro site, free)
                        ↕
-              Cloudflare Worker (AI-Vic API, free)
+              Cloudflare Worker — AI-Vic (new, free)
                        ↕
               Cloudflare Workers AI / Llama 3.1 (free)
 ```
+
+### Existing Cloudflare Account — AI Builders Studio: LatinX
+
+The CF account is already active with proven infrastructure. The portfolio site will be a
+second Pages project added to the same account.
+
+| Asset | Repo | Status |
+|---|---|---|
+| **Podcast site** (`aibuilderslatinx.com`) | `vhr1975/ai-builders-latinx-edition` | Live — 27 deployments, Git CI active |
+| **Gateway Worker** (`edge-ai-agent-lab`) | `ramirez-ai-labs/edge-ai-agent-lab` | Live — Workers AI binding active, 8 deploys |
+| **MCP Worker** (`edge-ai-agent-lab-mcp`) | `ramirez-ai-labs/edge-ai-agent-lab` | Live — MCP tools: `time_now`, `worker_info`, `echo` |
+
+**What this means for the portfolio build:**
+
+- No account setup needed — CF account, Wrangler, and Workers AI binding pattern are all proven
+- Pages CI (GitHub → Cloudflare Pages) is working and tested on the podcast site — same pattern applies here
+- The gateway worker is the reference implementation for the AI-Vic worker (Workers AI binding, worker-to-worker fetch pattern)
+- Domain `aibuilderslatinx.com` belongs to the podcast — portfolio needs its own domain or uses `.pages.dev`
 
 ### Cloudflare Free Tier Usage
 
 | Service | Free Allowance | Estimated Usage |
 |---|---|---|
-| Cloudflare Pages | 500 builds/mo, unlimited traffic | Well within |
+| Cloudflare Pages | 500 builds/mo, unlimited traffic | Well within (second Pages project) |
 | Cloudflare Workers | 100k requests/day | Fine for portfolio traffic |
 | Workers AI | 10k neurons/day | ~50-100 chat messages/day |
+
+### Known Account Security Gaps (fix alongside Sprint 1)
+
+| Gap | Severity | Fix |
+|---|---|---|
+| DMARC record error on `aibuilderslatinx.com` | Moderate | Add/correct DMARC TXT in DNS |
+| Bot Fight Mode not enabled | Low | One-toggle in Security settings |
+| AI crawl controls unconfigured | Low | Decide intentionally, then toggle |
+| Both Workers have no Git CI — Wrangler manual only | Operational risk | Wire to CI in Sprint 3 |
 
 ---
 
@@ -42,28 +69,37 @@ GitHub (source) → Cloudflare Pages (Astro site, free)
 
 | Route | Page | Status |
 |---|---|---|
-| `/` | Home (bio, featured projects, writing) | Draft |
-| `/projects` | 8 projects in 3 categories | Draft |
-| `/workshops` | 6 workshops in 2 categories | Draft |
-| `/podcast` | AI Builders: LatinX Edition | Draft |
-| `/cv` | Full CV with timeline | Draft |
+| `/` | Home (bio, featured projects, writing) | 80% — blog section still pulls dummy posts |
+| `/projects` | 8 projects in 3 categories | Done — placeholder images only |
+| `/workshops` | 6 workshops in 2 categories | Done — placeholder images only |
+| `/podcast` | AI Builders: LatinX Edition | 60% — host bio real, platform URLs are generic |
+| `/cv` | Full CV with timeline | Done |
 
 ---
 
 ## Sprint 1: Cloudflare Foundation & Deploy
 
-**Goal:** Get the current site live on Cloudflare Pages, replace GitHub Pages.
+**Goal:** Get the Astro site live on Cloudflare Pages as a second Pages project in the existing account.
 
-- [ ] Create Cloudflare account and connect GitHub repo to Cloudflare Pages
-- [ ] Configure build settings (`npm run build`, output: `dist/`, root: `astrofy-temp/`)
-- [ ] Verify auto-deploy on every push to `main`
+> CF account, Wrangler, and Pages CI are already proven — no account setup needed. Mirror the
+> podcast site pattern: connect repo → set build root → push to deploy.
+
+- [ ] Add portfolio as a new Pages project in the existing CF account
+  - Repo: `VRamirez-MIDS/VRamirez-MIDS.github.io`, branch: `main`
+  - Build command: `pnpm run build`
+  - Build output: `dist/`
+  - Root directory: `astrofy-temp/`
+- [ ] Verify auto-deploy fires on every push to `main`
 - [ ] Remove unused template pages: `store/`, `services/`, demo blog posts in `src/content/blog/`
-- [ ] Remove Blog from navigation, replace with link to Medium
-- [ ] Verify `output: 'static'` in `astro.config.mjs` for Cloudflare Pages compatibility
-- [ ] Set up custom domain on Cloudflare Pages (or use `.pages.dev` subdomain)
+- [ ] Remove Blog/Store/Services from navigation, replace Blog link with Medium
+- [ ] Verify `output: 'static'` in `astro.config.mjs` for Pages compatibility
+- [ ] Fix RSS feed export: rename `get` → `GET` in `rss.xml.js`
+- [ ] Decide and configure custom domain (or use `.pages.dev` for now — `aibuilderslatinx.com` is taken by the podcast)
 - [ ] Archive / redirect old GitHub Pages site
+- [ ] Fix DMARC record on `aibuilderslatinx.com` (account-level gap, low effort)
+- [ ] Enable Bot Fight Mode on `aibuilderslatinx.com` (one toggle)
 
-**Deliverable:** Live site on `pages.dev` or custom domain, replacing the old HTML site.
+**Deliverable:** Live portfolio on `pages.dev` or custom domain, auto-deploying from `main`.
 
 ---
 
@@ -83,7 +119,6 @@ GitHub (source) → Cloudflare Pages (Astro site, free)
 
 ### Technical
 - [ ] Remove `services.astro` and `store/` pages entirely
-- [ ] Fix RSS feed warning: rename `get` export to `GET` in `rss.xml.js`
 - [ ] Re-enable `sitemap` integration now that site URL is configured
 - [ ] Verify `robots.txt` has correct site URL
 
@@ -95,14 +130,20 @@ GitHub (source) → Cloudflare Pages (Astro site, free)
 
 **Goal:** Build and deploy the API that powers the chatbot.
 
+> Wrangler is already installed and in use. Workers AI binding pattern is proven in the
+> `edge-ai-agent-lab` gateway worker — use it as the reference implementation.
+
 ### Setup
-- [ ] Install Wrangler CLI: `npm install -g wrangler`
-- [ ] Create Worker project: `wrangler init ai-vic-worker`
-- [ ] Enable Workers AI binding in `wrangler.toml`:
+
+- [ ] Create new Worker project: `wrangler init ai-vic-worker`
+- [ ] Enable Workers AI binding in `wrangler.toml` (same pattern as `edge-ai-agent-lab`):
+
   ```toml
   [ai]
   binding = "AI"
   ```
+
+- [ ] Wire GitHub repo → Workers CI to avoid manual Wrangler deploys (gap flagged in account audit)
 
 ### Grounding Content
 - [ ] Extract resume PDF to text via `pdfplumber`
@@ -128,7 +169,7 @@ GitHub (source) → Cloudflare Pages (Astro site, free)
 - [ ] Deploy: `wrangler deploy`
 - [ ] Test via curl / Postman with 20+ real visitor questions
 
-**Deliverable:** Live Worker at `ai-vic.yourname.workers.dev/chat` returning accurate answers about Victor.
+**Deliverable:** Live Worker at `ai-vic-worker.[account].workers.dev/chat` returning accurate answers about Victor.
 
 ---
 
