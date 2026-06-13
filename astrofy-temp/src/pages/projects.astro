@@ -1,0 +1,82 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+---
+
+<BaseLayout title="Projects" sideBarActiveItemID="projects">
+  <div>
+    <div class="text-3xl w-full font-bold mb-5">AI & Machine Learning</div>
+  </div>
+
+  <HorizontalCard
+    title="ML System Engineering & MLOps"
+    img="/post_img.webp"
+    desc="End-to-end ML platform built on Kubernetes and microservices, including containerized model serving, automated retraining pipelines, CI/CD for ML, and production monitoring. Stack: Kubernetes, Docker, FastAPI, MLflow."
+    url="https://github.com/VRamirez-MIDS"
+    badge="MLOps"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Machine Learning at Scale: Flight Delay Prediction"
+    img="/post_img.webp"
+    desc="Distributed ML pipeline predicting flight delays across 30M+ records using MapReduce, Hadoop, and Apache Spark on Databricks. Applied ensemble methods (GBT, Random Forest) with feature engineering on temporal and weather data."
+    url="https://github.com/VRamirez-MIDS"
+    badge="Spark"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Machine Learning: Understanding Hate Crime Patterns"
+    img="/post_img.webp"
+    desc="Applied linear regression and TensorFlow to identify socioeconomic and demographic predictors of hate crime rates across U.S. counties. Surfaced statistically significant correlations to inform policy research."
+    url="https://github.com/VRamirez-MIDS"
+    badge="TensorFlow"
+  />
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Data Engineering & Architecture</div>
+  </div>
+
+  <HorizontalCard
+    title="Data Engineering: Location Recommendations with NoSQL"
+    img="/post_img.webp"
+    desc="Multi-database recommendation engine using Neo4j (graph traversal), MongoDB (document store), and Redis (caching) to generate personalized store location suggestions at low latency."
+    url="https://github.com/VRamirez-MIDS"
+    badge="NoSQL"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Data Analysis: NFL Big Data Bowl"
+    img="/post_img.webp"
+    desc="Exploratory data analysis on NFL tracking data using Python, NumPy, and Pandas. Analyzed player movement patterns and derived game-level insights from raw positional data."
+    url="https://github.com/VRamirez-MIDS"
+    badge="EDA"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Statistical Analysis: Movie Revenue Regression Study"
+    img="/post_img.webp"
+    desc="Designed and executed a research study on movie revenue predictors using OLS regression, hypothesis testing, and diagnostic analysis to identify drivers of box office performance."
+    url="https://github.com/VRamirez-MIDS"
+    badge="Stats"
+  />
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Visualization & Mobile</div>
+  </div>
+
+  <HorizontalCard
+    title="Data Visualization: Travel Guide Reimagined"
+    img="/post_img.webp"
+    desc="Interactive Tableau dashboard reimagining travel data as a visual guide, layering geographic, seasonal, and sentiment data to surface non-obvious destination insights."
+    url="https://github.com/VRamirez-MIDS"
+    badge="Tableau"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Capstone: enRoute, Running Route Safety App"
+    img="/post_img.webp"
+    desc="iOS app leveraging real-time safety data and ML-based route scoring to recommend safe running routes. Full mobile + backend stack built as UC Berkeley MIDS capstone project."
+    url="https://github.com/VRamirez-MIDS"
+    badge="iOS"
+  />
+</BaseLayout>

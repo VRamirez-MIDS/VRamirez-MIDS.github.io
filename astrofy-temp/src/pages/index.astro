@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+import { getCollection } from "astro:content";
+import createSlug from "../lib/createSlug"
+
+const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const last_posts = posts.slice(0, 3);
+---
+
+<BaseLayout sideBarActiveItemID="home">
+  <div class="pb-12 mt-5">
+    <div class="text-xl py-1">Hi, I'm Victor 👋</div>
+    <div class="text-5xl font-bold">AI Architect & Director</div>
+    <div class="text-3xl py-3 font-bold">Developer & Platform Experience · Moody's Analytics</div>
+    <div class="py-2">
+      <text class="text-lg">
+        17 years building production systems at scale, with the last three as AI Architect and now Director, owning the
+        engineering platform that helps hundreds of developers build, ship, and operate software. My focus is
+        <b>AI infrastructure</b>: RAG pipelines, LLM evaluation frameworks (Recall@k, groundedness, MRR),
+        agentic workflows, and the cloud architecture that runs them in production.
+        I hold a Master's in Data Science from <b>UC Berkeley (GPA 3.81)</b>.
+      </text>
+    </div>
+    <div class="py-2">
+      <text class="text-lg">
+        I host <a href="/podcast" class="font-bold underline">AI Builders: LatinX Edition</a>, a podcast featuring
+        researchers and practitioners shaping the future of AI, and teach RAG, embeddings, and LLM fundamentals
+        at <b>Techqueria</b> workshops. I've spoken at Techqueria Tech Summit, Oakland Tech Week, and the Latino AI Summit.
+      </text>
+    </div>
+    <div class="mt-8">
+      <a class="btn" href="/projects">See My Projects</a>
+      <a href="/cv" class="btn btn-outline ml-5">View CV</a>
+    </div>
+  </div>
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-2">Featured Projects</div>
+  </div>
+
+  <HorizontalCard
+    title="ML System Engineering & MLOps"
+    img="/post_img.webp"
+    desc="End-to-end ML platform built on Kubernetes and microservices, including containerized model serving, automated retraining pipelines, and production monitoring at scale."
+    url="https://github.com/VRamirez-MIDS"
+    badge="MLOps"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Machine Learning at Scale: Flight Delay Prediction"
+    img="/post_img.webp"
+    desc="Distributed ML pipeline using MapReduce, Hadoop, and Apache Spark on Databricks to predict flight delays across 30M+ records with ensemble methods."
+    url="https://github.com/VRamirez-MIDS"
+    badge="Spark"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Capstone: enRoute, Running Route Safety App"
+    img="/post_img.webp"
+    desc="iOS app leveraging real-time safety data and ML to recommend running routes. Built as UC Berkeley MIDS capstone with a full mobile + backend stack."
+    url="https://github.com/VRamirez-MIDS"
+    badge="iOS"
+  />
+
+  {last_posts.length > 0 && (
+    <div>
+      <div class="text-3xl w-full font-bold mb-5 mt-10">Latest Writing</div>
+    </div>
+  )}
+
+  {
+    last_posts.map((post) => (
+      <>
+        <HorizontalCard
+          title={post.data.title}
+          img={post.data.heroImage}
+          desc={post.data.description}
+          url={"/blog/" + createSlug(post.data.title, post.slug)}
+          target="_self"
+          badge={post.data.badge}
+        />
+        <div class="divider my-0" />
+      </>
+    ))
+  }
+</BaseLayout>
