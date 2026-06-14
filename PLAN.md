@@ -13,7 +13,7 @@ GitHub (source) → Cloudflare Pages (Astro site, free)
                        ↕
               Cloudflare Worker — AI-Vic (new, free)
                        ↕
-              Cloudflare Workers AI / Llama 3.1 (free)
+              Cloudflare Workers AI / Llama 3.1 8B Instruct (free, NOT Claude API)
 ```
 
 ### Existing Cloudflare Account — AI Builders Studio: LatinX
@@ -57,10 +57,11 @@ second Pages project added to the same account.
 
 - **Framework**: Astro 4 + Tailwind CSS + DaisyUI
 - **Template base**: Astrofy
+- **Package manager**: npm (not pnpm — `package-lock.json` is authoritative, `pnpm-lock.yaml` ignored)
 - **Hosting**: Cloudflare Pages
 - **Chatbot API**: Cloudflare Worker
-- **AI Model**: Cloudflare Workers AI / Llama 3.1 8B Instruct
-- **Grounding**: System prompt stuffed with resume + bio + projects + workshops content
+- **AI Model**: Cloudflare Workers AI / Llama 3.1 8B Instruct (free tier — NOT the Claude API)
+- **Grounding**: System prompt stuffed with resume + bio + projects + workshops content (~3-5k tokens, fits Llama 3.1's 128k context — RAG not needed)
 - **Chat UI**: React island component (DaisyUI chat bubbles) in Astro
 
 ---
@@ -70,10 +71,17 @@ second Pages project added to the same account.
 | Route | Page | Status |
 |---|---|---|
 | `/` | Home (bio, featured projects, writing) | 80% — blog section still pulls dummy posts |
-| `/projects` | 8 projects in 3 categories | Done — placeholder images only |
-| `/workshops` | 6 workshops in 2 categories | Done — placeholder images only |
-| `/podcast` | AI Builders: LatinX Edition | 60% — host bio real, platform URLs are generic |
+| `/projects` | 8 projects in 3 categories | Done — placeholder images, some placeholder URLs |
+| `/workshops` | 6 workshops in 2 categories | Done — placeholder images, some placeholder URLs |
+| `/podcast` | AI Builders: LatinX Edition | 70% — host bio real, Spotify/Apple URLs real, Amazon Music URL missing |
 | `/cv` | Full CV with timeline | Done |
+
+---
+
+## Sprint 0: Astro Scaffold ✅ COMPLETE
+
+Branch `astrofy-port` created and pushed. All 5 pages drafted, em-dashes removed,
+sidebar and nav wired. PR open against `main`.
 
 ---
 
@@ -86,7 +94,7 @@ second Pages project added to the same account.
 
 - [ ] Add portfolio as a new Pages project in the existing CF account
   - Repo: `VRamirez-MIDS/VRamirez-MIDS.github.io`, branch: `main`
-  - Build command: `pnpm run build`
+  - Build command: `npm run build` (not pnpm)
   - Build output: `dist/`
   - Root directory: `astrofy-temp/`
 - [ ] Verify auto-deploy fires on every push to `main`
@@ -94,10 +102,13 @@ second Pages project added to the same account.
 - [ ] Remove Blog/Store/Services from navigation, replace Blog link with Medium
 - [ ] Verify `output: 'static'` in `astro.config.mjs` for Pages compatibility
 - [ ] Fix RSS feed export: rename `get` → `GET` in `rss.xml.js`
-- [ ] Decide and configure custom domain (or use `.pages.dev` for now — `aibuilderslatinx.com` is taken by the podcast)
-- [ ] Archive / redirect old GitHub Pages site
+- [ ] Decide and configure custom domain (or use `.pages.dev` for now)
 - [ ] Fix DMARC record on `aibuilderslatinx.com` (account-level gap, low effort)
 - [ ] Enable Bot Fight Mode on `aibuilderslatinx.com` (one toggle)
+
+> **Old site archiving:** Do NOT archive or redirect the old GitHub Pages HTML site during
+> this sprint. Keep it live until the new Astro site is fully polished and ready. Archiving
+> happens in Sprint 5 only.
 
 **Deliverable:** Live portfolio on `pages.dev` or custom domain, auto-deploying from `main`.
 
@@ -107,10 +118,28 @@ second Pages project added to the same account.
 
 **Goal:** Turn the draft into a finished product. No placeholder content anywhere.
 
+### Real URLs to wire in
+
+| Location | Field | Real URL |
+|---|---|---|
+| Podcast page | Spotify | `https://open.spotify.com/show/4quI3hyXMd6UjBGy13weMK` |
+| Podcast page | Apple Podcasts | `https://podcasts.apple.com/podcast/id1837592967` |
+| Podcast page | Amazon Music | Not yet available — use `https://music.amazon.com/podcasts` as placeholder |
+| Projects page | enRoute capstone | `https://ischool.berkeley.edu/projects/2023/enroute` |
+| Workshops page | GenAI Tutorial | `https://github.com/techqueria/GenAI-Tutorial` |
+| Workshops page | AI Para Todos | `https://github.com/techqueria/ai-para-todos` |
+
+### Images (14 placeholders to replace)
+
+All cards currently use `/post_img.webp` (Astrofy default). Replace with real screenshots,
+GitHub social preview cards, or app store images. Note: if using `movie-anlysis.jpg`, the
+filename has a typo — rename it or match exactly in the `img` prop.
+
 ### Visual & Content
-- [ ] Replace all Astro logo placeholder images with real project screenshots or GitHub preview cards
-- [ ] Add real Spotify / Apple Podcasts / Amazon Music URLs to the Podcast page
-- [ ] Replace "Latest Writing" section on Home with 3 hand-picked Medium article cards (title, description, link to Medium) — no blog system needed
+- [ ] Replace all 14 placeholder images with real project/workshop screenshots or GitHub preview cards
+- [ ] Wire real Spotify and Apple Podcasts URLs (see table above)
+- [ ] Add "Recent Episodes" section to podcast page (3-5 episodes: title, date, short description, link)
+- [ ] Replace "Latest Writing" section on Home with 3 hand-picked Medium article cards (title, desc, link) — no blog system needed
 - [ ] Add Open Graph meta tags to all pages (title, description, image) for LinkedIn/Slack unfurls
 - [ ] Add a custom `favicon.svg` with initials or personal mark
 - [ ] Add a "Speaking" subsection to Home page: Techqueria Tech Summit, Oakland Tech Week, Latino AI Summit
@@ -130,6 +159,9 @@ second Pages project added to the same account.
 
 **Goal:** Build and deploy the API that powers the chatbot.
 
+> **Model: Cloudflare Workers AI / Llama 3.1 8B Instruct — free tier. This is NOT the Claude API.**
+> The Claude API is opt-in only and has no role in this stack.
+>
 > Wrangler is already installed and in use. Workers AI binding pattern is proven in the
 > `edge-ai-agent-lab` gateway worker — use it as the reference implementation.
 
@@ -165,7 +197,7 @@ second Pages project added to the same account.
   - Call `env.AI.run("@cf/meta/llama-3.1-8b-instruct", { messages: [...] })`
   - Return `{ reply }`
 - [ ] Add CORS headers for Cloudflare Pages domain
-- [ ] Add basic rate limiting to protect free tier
+- [ ] Add basic rate limiting to protect free tier (10k neurons/day)
 - [ ] Deploy: `wrangler deploy`
 - [ ] Test via curl / Postman with 20+ real visitor questions
 
@@ -206,7 +238,9 @@ second Pages project added to the same account.
 - [ ] Lighthouse audit — target 90+ on Performance, Accessibility, SEO
 - [ ] Configure `www` redirect and verify HTTPS on custom domain
 - [ ] Final copy review across all pages
-- [ ] Confirm old GitHub Pages site is archived or redirected
+- [ ] **Archive old GitHub Pages site** — only once the new Astro site is confirmed live and
+  fully polished. Options: remove old HTML files from repo root, redirect via `_redirects`,
+  or move to an `archive/` branch.
 
 **Deliverable:** Production site live at custom domain with AI-Vic chatbot, fully on Cloudflare free tier.
 
@@ -215,22 +249,36 @@ second Pages project added to the same account.
 ## Content Inventory
 
 ### Projects (8 total)
-1. ML System Engineering & MLOps — Kubernetes, Docker, FastAPI, MLflow
-2. Machine Learning at Scale: Flight Delay Prediction — Spark, Hadoop, MapReduce
-3. Machine Learning: Understanding Hate Crime Patterns — TensorFlow, linear regression
-4. Data Engineering: Location Recommendations with NoSQL — Neo4j, MongoDB, Redis
-5. Data Analysis: NFL Big Data Bowl — Python, NumPy, Pandas
-6. Statistical Analysis: Movie Revenue Regression Study — OLS regression
-7. Data Visualization: Travel Guide Reimagined — Tableau
-8. Capstone: enRoute, Running Route Safety App — iOS, ML
+
+| Project | Real URL |
+|---|---|
+| ML System Engineering & MLOps | `https://github.com/VRamirez-MIDS` (no dedicated repo yet) |
+| Machine Learning at Scale: Flight Delay Prediction | `https://github.com/VRamirez-MIDS` |
+| Machine Learning: Understanding Hate Crime Patterns | `https://github.com/VRamirez-MIDS` |
+| Data Engineering: Location Recommendations with NoSQL | `https://github.com/VRamirez-MIDS` |
+| Data Analysis: NFL Big Data Bowl | `https://github.com/VRamirez-MIDS` |
+| Statistical Analysis: Movie Revenue Regression Study | `https://github.com/VRamirez-MIDS` |
+| Data Visualization: Travel Guide Reimagined | `https://github.com/VRamirez-MIDS` |
+| Capstone: enRoute, Running Route Safety App | `https://ischool.berkeley.edu/projects/2023/enroute` |
 
 ### Workshops (6 total)
-1. GenAI Tutorial: Chatbots, Memory & RAG Systems
-2. OpenAI API Tutorials: GPT Models, Fine-Tuning & Integration
-3. AI Mastery Hub: Beginner to Expert Learning Path
-4. AI Para Todos: Accessible AI Workshop Series
-5. Software Architecture Showcase
-6. AI vs ML vs DL: The Definitive Guide
+
+| Workshop | Real URL |
+|---|---|
+| GenAI Tutorial: Chatbots, Memory & RAG Systems | `https://github.com/techqueria/GenAI-Tutorial` |
+| OpenAI API Tutorials | `https://github.com/VRamirez-MIDS` |
+| AI Mastery Hub | `https://github.com/VRamirez-MIDS` |
+| AI Para Todos | `https://github.com/techqueria/ai-para-todos` |
+| Software Architecture Showcase | `https://github.com/VRamirez-MIDS` |
+| AI vs ML vs DL | `https://github.com/VRamirez-MIDS` |
+
+### Podcast
+
+| Platform | URL |
+|---|---|
+| Spotify | `https://open.spotify.com/show/4quI3hyXMd6UjBGy13weMK` |
+| Apple Podcasts | `https://podcasts.apple.com/podcast/id1837592967` |
+| Amazon Music | Not yet available |
 
 ### Community & Speaking
 - Podcast: AI Builders: LatinX Edition
@@ -243,7 +291,9 @@ second Pages project added to the same account.
 ## Open Items / Decisions Needed
 
 - [ ] Custom domain? (e.g. `victorramirez.dev` or keep `vramirez-mids.github.io`)
-- [ ] Real Spotify / Apple Podcasts URLs for the podcast page
-- [ ] Project screenshot images to replace Astro placeholders
+- [ ] Amazon Music podcast URL (not yet available — check back)
+- [ ] Individual GitHub repo URLs for MIDS projects (or confirm org-level links are acceptable)
+- [ ] Project screenshot images to replace 14 Astro placeholders
 - [ ] Medium article URLs for the "Latest Writing" section (pick 3 best)
 - [ ] Confirm chatbot persona name: "AI-Vic" or something else
+- [ ] Podcast episode list for Sprint 2 (titles, dates, episode URLs for "Recent Episodes" section)
