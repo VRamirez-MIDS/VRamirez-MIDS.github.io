@@ -1,0 +1,121 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TimeLineElement from "../components/cv/TimeLine.astro";
+---
+
+<BaseLayout
+  title="CV — Victor Ramirez"
+  description="CV for Victor Ramirez — Director of Developer & Platform Experience at Moody's Analytics. 17 years building production AI systems, developer platforms, and cloud infrastructure at scale."
+  sideBarActiveItemID="cv"
+>
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Profile</div>
+  </div>
+
+  <div class="mb-10 text-justify">
+    Director of Developer & Platform Experience at Moody's Analytics with 17 years of experience building production
+    systems at scale. My career arc spans DevOps architecture, AI/ML engineering, and platform leadership, with the last
+    three years focused entirely on AI infrastructure: RAG pipelines, LLM evaluation frameworks, agentic workflows,
+    and the internal developer platforms that let engineering teams ship faster and more safely.
+    I hold a Master's in Data Science from UC Berkeley (GPA 3.81) and am an active community builder through
+    my podcast, Techqueria workshops, and conference speaking.
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Experience</div>
+  </div>
+
+  <div class="time-line-container mb-10">
+    <TimeLineElement
+      title="Director, Developer & Platform Experience"
+      subtitle="2024 – Present · Moody's Analytics · New York, NY (Remote)"
+    >
+      Lead the engineering platform responsible for how hundreds of developers build, ship, and operate software.
+      Own AI infrastructure strategy including RAG pipeline design, LLM evaluation frameworks (Recall@k, groundedness, MRR),
+      agentic workflow orchestration, and cloud architecture across AWS and Azure. Drive internal developer enablement
+      programs and tooling that reduce onboarding time and increase deployment frequency across engineering teams.
+    </TimeLineElement>
+    <TimeLineElement
+      title="AI Architect"
+      subtitle="2023 – 2024 · Moody's Analytics · New York, NY (Remote)"
+    >
+      Designed and shipped AI systems including RAG pipelines, vector search infrastructure, embedding workflows,
+      and LLM benchmarking frameworks using Databricks and Spark. Led evaluation strategy for generative AI
+      products, establishing Recall@k, Precision@k, MRR, and groundedness as standard metrics. Collaborated
+      cross-functionally with product and data science teams to bring agentic workflows into production.
+    </TimeLineElement>
+    <TimeLineElement
+      title="Associate Director, DevOps Architect"
+      subtitle="2015 – 2023 · Moody's Analytics · New York, NY (Remote)"
+    >
+      Led DevOps architecture and platform engineering across a multi-cloud environment (AWS, Azure).
+      Designed secure-by-default CI/CD pipelines, containerization strategies (Docker, Kubernetes), and
+      infrastructure-as-code tooling (Terraform, GitHub Actions) adopted across multiple engineering teams.
+      Drove the transition from monolithic deployment models to microservices, reducing release cycle time significantly.
+    </TimeLineElement>
+    <TimeLineElement
+      title="Earlier Roles at Moody's Analytics"
+      subtitle="2007 – 2015 · Moody's Analytics"
+    >
+      Progressed through increasingly senior engineering roles over eight years, building deep expertise in
+      platform engineering, systems architecture, and enterprise software delivery.
+    </TimeLineElement>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Education</div>
+  </div>
+
+  <div class="time-line-container grid gap-4 mb-10">
+    <TimeLineElement
+      title="Master of Information and Data Science (MIDS), GPA 3.81"
+      subtitle="2021 – 2023 · UC Berkeley School of Information · Berkeley, CA"
+    />
+    <TimeLineElement
+      title="Bachelor's Degree"
+      subtitle="Earlier education · Computer Science / Engineering"
+    />
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Community & Speaking</div>
+  </div>
+
+  <ul class="list-disc mx-6 mb-10 grid gap-2">
+    <li>Host: <a href="/podcast" class="font-bold underline">AI Builders: LatinX Edition</a> — podcast amplifying LatinX voices in AI, covering RAG, agents, LLM infrastructure, and the practitioners building it</li>
+    <li>Instructor: Techqueria — teaches Claude, RAG systems, embeddings, agentic workflows, and LLM fundamentals to the LatinX engineering community</li>
+    <li>Speaker: Techqueria Tech Summit</li>
+    <li>Speaker: Oakland Tech Week</li>
+    <li>Speaker: Latino AI Summit</li>
+    <li>Writing: <a href="https://medium.com/@vhr1975" target="_blank" class="font-bold underline">medium.com/@vhr1975</a></li>
+  </ul>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Skills</div>
+  </div>
+
+  <ul class="list-disc md:columns-3 columns-2 mx-6">
+    <li>Python</li>
+    <li>TypeScript</li>
+    <li>SQL / Spark SQL</li>
+    <li>RAG Pipelines</li>
+    <li>LLM Evaluation</li>
+    <li>Agentic Workflows</li>
+    <li>Vector Search</li>
+    <li>LangChain / LangGraph</li>
+    <li>FastAPI</li>
+    <li>AWS / Azure</li>
+    <li>Kubernetes</li>
+    <li>Docker</li>
+    <li>Terraform</li>
+    <li>GitHub Actions</li>
+    <li>Databricks / Spark</li>
+    <li>TensorFlow</li>
+    <li>MLflow</li>
+    <li>Tableau</li>
+    <li>Next.js</li>
+    <li>Cloudflare Workers</li>
+    <li>MCP / Tool Use</li>
+    <li>Claude / GPT-4o</li>
+  </ul>
+</BaseLayout>

@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+---
+
+<BaseLayout
+  sideBarActiveItemID="home"
+  title="Victor Ramirez | AI Architecture & Developer Platforms"
+  description="Director of Developer & Platform Experience at Moody's Analytics. I build production AI systems — RAG pipelines, LLM evaluation frameworks, agentic workflows — and the developer platforms that help engineering teams ship faster."
+>
+  <div class="pb-8 mt-5">
+    <div class="text-xl py-1">Hi, I'm Victor 👋</div>
+    <div class="text-5xl font-bold">AI Architect & Director</div>
+    <div class="text-3xl py-3 font-bold">Developer & Platform Experience · Moody's Analytics</div>
+    <div class="py-2">
+      <text class="text-lg">
+        17 years building production systems at scale, with the last three as AI Architect and now Director, owning the
+        engineering platform that helps hundreds of developers build, ship, and operate software. My focus is
+        <b>AI infrastructure</b>: RAG pipelines, LLM evaluation frameworks (Recall@k, groundedness, MRR),
+        agentic workflows, and the cloud architecture that runs them in production.
+        I hold a Master's in Data Science from <b>UC Berkeley (GPA 3.81)</b>.
+      </text>
+    </div>
+    <div class="py-2">
+      <text class="text-lg">
+        I host <a href="/podcast" class="font-bold underline">AI Builders: LatinX Edition</a>, a podcast featuring
+        researchers and practitioners shaping the future of AI, and teach RAG, embeddings, and LLM fundamentals
+        at <b>Techqueria</b> workshops. I've spoken at Techqueria Tech Summit, Oakland Tech Week, and the Latino AI Summit.
+      </text>
+    </div>
+    <div class="mt-8">
+      <a class="btn" href="/projects">See My Work</a>
+      <a href="/cv" class="btn btn-outline ml-5">View CV</a>
+    </div>
+  </div>
+
+  <!-- What I Build -->
+  <div class="mb-2">
+    <div class="text-2xl w-full font-bold">What I Build</div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10">
+    <div class="card bg-base-200">
+      <div class="card-body py-4 px-5">
+        <div class="font-semibold text-base">RAG Pipelines & Retrieval Systems</div>
+        <div class="text-sm opacity-75">Production retrieval-augmented generation connecting LLMs to enterprise knowledge at scale</div>
+      </div>
+    </div>
+    <div class="card bg-base-200">
+      <div class="card-body py-4 px-5">
+        <div class="font-semibold text-base">LLM Evaluation Frameworks</div>
+        <div class="text-sm opacity-75">Rigorous benchmarking with Recall@k, Precision@k, MRR, and groundedness — not ad-hoc testing</div>
+      </div>
+    </div>
+    <div class="card bg-base-200">
+      <div class="card-body py-4 px-5">
+        <div class="font-semibold text-base">Agentic Workflows</div>
+        <div class="text-sm opacity-75">Multi-turn agent orchestration, function calling, and tool-use patterns deployed in production</div>
+      </div>
+    </div>
+    <div class="card bg-base-200">
+      <div class="card-body py-4 px-5">
+        <div class="font-semibold text-base">Developer Platforms</div>
+        <div class="text-sm opacity-75">Internal developer platforms and CI/CD infrastructure that help engineering teams ship faster</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Work -->
+  <div>
+    <div class="text-2xl w-full font-bold mb-2">Featured Work</div>
+  </div>
+
+  <HorizontalCard
+    title="LLM Evaluation Framework"
+    img="/post_img.webp"
+    desc="Designed and operated the evaluation framework for generative AI products at enterprise scale. Defined retrieval quality metrics (Recall@k, Precision@k, MRR) and generation quality metrics (groundedness, faithfulness) — built on Databricks and Spark, adopted as standard practice across AI product teams."
+    url="/projects"
+    badge="LLM Eval"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="RAG Pipeline Infrastructure"
+    img="/post_img.webp"
+    desc="Architected production retrieval-augmented generation pipelines connecting LLMs to enterprise knowledge sources. Designed embedding workflows, vector search infrastructure, and retrieval optimization for production workloads at scale."
+    url="/projects"
+    badge="RAG"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="edge-ai-agent-lab — Live MCP Worker"
+    img="/post_img.webp"
+    desc="Live Cloudflare Worker implementing the Model Context Protocol (MCP) — exposes agentic tools at the edge using Workers AI bindings. A public reference implementation for MCP server patterns and edge AI deployment."
+    url="https://github.com/ramirez-ai-labs/edge-ai-agent-lab"
+    badge="Live · MCP"
+    target="_blank"
+  />
+
+  <!-- Speaking -->
+  <div class="mt-10 mb-4">
+    <div class="text-2xl w-full font-bold">Speaking</div>
+  </div>
+  <div class="flex flex-wrap gap-2 mb-10">
+    <span class="badge badge-lg badge-outline py-3">Techqueria Tech Summit</span>
+    <span class="badge badge-lg badge-outline py-3">Oakland Tech Week</span>
+    <span class="badge badge-lg badge-outline py-3">Latino AI Summit</span>
+  </div>
+
+  <!-- Writing -->
+  <div class="mt-2 mb-4">
+    <div class="text-2xl w-full font-bold">Writing</div>
+  </div>
+  <div class="mb-2 text-base opacity-75">
+    I write about RAG systems, LLM evaluation, agentic architectures, and developer productivity on Medium.
+  </div>
+  <a
+    href="https://medium.com/@vhr1975"
+    target="_blank"
+    class="btn btn-outline"
+  >
+    Read on Medium
+  </a>
+
+</BaseLayout>
