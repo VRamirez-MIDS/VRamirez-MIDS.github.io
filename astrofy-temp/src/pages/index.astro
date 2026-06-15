@@ -36,31 +36,32 @@ const last_posts = posts.slice(0, 3);
   </div>
 
   <div>
-    <div class="text-3xl w-full font-bold mb-2">Featured Projects</div>
+    <div class="text-3xl w-full font-bold mb-2">Featured Work</div>
   </div>
 
   <HorizontalCard
-    title="ML System Engineering & MLOps"
+    title="LLM Evaluation Framework"
     img="/post_img.webp"
-    desc="End-to-end ML platform built on Kubernetes and microservices, including containerized model serving, automated retraining pipelines, and production monitoring at scale."
-    url="https://github.com/VRamirez-MIDS"
-    badge="MLOps"
+    desc="Designed and operated the evaluation framework for generative AI products at enterprise scale. Defined retrieval quality metrics (Recall@k, Precision@k, MRR) and generation quality metrics (groundedness, faithfulness) — built on Databricks and Spark, adopted as standard practice across AI product teams."
+    url="/projects"
+    badge="LLM Eval"
   />
   <div class="divider my-0"></div>
   <HorizontalCard
-    title="Machine Learning at Scale: Flight Delay Prediction"
+    title="RAG Pipeline Infrastructure"
     img="/post_img.webp"
-    desc="Distributed ML pipeline using MapReduce, Hadoop, and Apache Spark on Databricks to predict flight delays across 30M+ records with ensemble methods."
-    url="https://github.com/VRamirez-MIDS"
-    badge="Spark"
+    desc="Architected production retrieval-augmented generation pipelines connecting LLMs to enterprise knowledge sources. Designed embedding workflows, vector search infrastructure, and retrieval optimization for production workloads at scale."
+    url="/projects"
+    badge="RAG"
   />
   <div class="divider my-0"></div>
   <HorizontalCard
-    title="Capstone: enRoute, Running Route Safety App"
+    title="edge-ai-agent-lab — Live MCP Worker"
     img="/post_img.webp"
-    desc="iOS app leveraging real-time safety data and ML to recommend running routes. Built as UC Berkeley MIDS capstone with a full mobile + backend stack."
-    url="https://github.com/VRamirez-MIDS"
-    badge="iOS"
+    desc="Live Cloudflare Worker implementing the Model Context Protocol (MCP) — exposes agentic tools at the edge using Workers AI bindings. A public reference implementation for MCP server patterns and edge AI deployment."
+    url="https://github.com/ramirez-ai-labs/edge-ai-agent-lab"
+    badge="Live · MCP"
+    target="_blank"
   />
 
   {last_posts.length > 0 && (

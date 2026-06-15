@@ -4,8 +4,85 @@ import HorizontalCard from "../components/HorizontalCard.astro";
 ---
 
 <BaseLayout title="Projects" sideBarActiveItemID="projects">
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: Production AI Systems                              -->
+  <!-- ============================================================ -->
   <div>
-    <div class="text-3xl w-full font-bold mb-5">AI & Machine Learning</div>
+    <div class="text-3xl w-full font-bold mb-2">Production AI Systems</div>
+    <div class="text-base opacity-75 mb-6">
+      Systems designed and operated at enterprise scale inside large engineering organizations.
+      Described at a high level — source is proprietary.
+    </div>
+  </div>
+
+  <HorizontalCard
+    title="LLM Evaluation Framework"
+    img="/post_img.webp"
+    desc="Designed and operated the evaluation framework for generative AI products in production. Defined methodology across retrieval quality (Recall@k, Precision@k, MRR) and generation quality (groundedness, faithfulness). Built evaluation infrastructure on Databricks and Spark to run benchmarks at scale, replacing ad-hoc testing with rigorous, reproducible measurement across AI product teams."
+    url="/cv"
+    badge="LLM Eval"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="RAG Pipeline Infrastructure"
+    img="/post_img.webp"
+    desc="Architected production retrieval-augmented generation pipelines connecting large language models to enterprise knowledge sources. Designed embedding workflows, vector search infrastructure, and retrieval optimization strategies for production workloads — grounding model outputs in authoritative internal content to reduce hallucination risk in high-stakes enterprise contexts."
+    url="/cv"
+    badge="RAG"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Agentic Workflow Platform"
+    img="/post_img.webp"
+    desc="Designed and deployed agentic AI systems in production — multi-turn agent orchestration, function calling, and tool-use patterns at enterprise scale. Built the infrastructure enabling LLMs to interact with internal systems, execute multi-step tasks autonomously, and maintain context across complex workflows across AWS and Azure environments."
+    url="/cv"
+    badge="Agents"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Internal Developer Platform"
+    img="/post_img.webp"
+    desc="Led the engineering platform serving hundreds of developers across build, ship, and operate workflows. Designed secure-by-default CI/CD pipelines, containerization strategies, and infrastructure-as-code tooling adopted across the engineering organization. Drove the architectural shift from monolithic deployment models to microservices, significantly reducing release cycle time."
+    url="/cv"
+    badge="Platform"
+  />
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: Live Demos                                         -->
+  <!-- ============================================================ -->
+  <div>
+    <div class="text-3xl w-full font-bold mb-2 mt-14">Live Demos</div>
+    <div class="text-base opacity-75 mb-6">
+      Running systems with public source. These are live — you can interact with them or read the code.
+    </div>
+  </div>
+
+  <HorizontalCard
+    title="edge-ai-agent-lab — MCP Worker"
+    img="/post_img.webp"
+    desc="Live Cloudflare Worker implementing the Model Context Protocol (MCP). Exposes three tools — time_now, worker_info, and echo — demonstrating MCP server patterns, Workers AI binding, and edge AI deployment at the Cloudflare edge. A reference implementation for agentic tool-use architecture. Source on GitHub."
+    url="https://github.com/ramirez-ai-labs/edge-ai-agent-lab"
+    badge="Live · MCP"
+    target="_blank"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="AI-Vic — Conversational AI on the Edge"
+    img="/post_img.webp"
+    desc="An AI assistant grounded in resume, projects, and background — deployed as a Cloudflare Worker using Workers AI and Llama 3.1 8B. Demonstrates system prompt grounding, edge inference, and conversational UX patterns without a RAG layer. Use the chat widget on this site to interact with it."
+    url="/cv"
+    badge="Coming Soon"
+  />
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: Graduate Research                                  -->
+  <!-- ============================================================ -->
+  <div>
+    <div class="text-3xl w-full font-bold mb-2 mt-14">Graduate Research</div>
+    <div class="text-base opacity-75 mb-6">
+      Projects completed during the UC Berkeley Master of Information and Data Science (MIDS) program, 2021–2023.
+    </div>
   </div>
 
   <HorizontalCard
@@ -31,11 +108,7 @@ import HorizontalCard from "../components/HorizontalCard.astro";
     url="https://github.com/VRamirez-MIDS"
     badge="TensorFlow"
   />
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Data Engineering & Architecture</div>
-  </div>
-
+  <div class="divider my-0"></div>
   <HorizontalCard
     title="Data Engineering: Location Recommendations with NoSQL"
     img="/post_img.webp"
@@ -59,11 +132,7 @@ import HorizontalCard from "../components/HorizontalCard.astro";
     url="https://github.com/VRamirez-MIDS"
     badge="Stats"
   />
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Visualization & Mobile</div>
-  </div>
-
+  <div class="divider my-0"></div>
   <HorizontalCard
     title="Data Visualization: Travel Guide Reimagined"
     img="/post_img.webp"
@@ -79,4 +148,5 @@ import HorizontalCard from "../components/HorizontalCard.astro";
     url="https://ischool.berkeley.edu/projects/2023/enroute"
     badge="iOS"
   />
+
 </BaseLayout>
